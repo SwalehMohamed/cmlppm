@@ -70,6 +70,9 @@ export async function createInvoice(prevState: State, formData: FormData) {
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
+
+
+
   // Use Zod to update the expected types
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
  

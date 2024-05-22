@@ -94,10 +94,8 @@ async function seedOrders(client) {
     // Create the "orders" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS orders (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-    mo VARCHAR(255) NOT NULL,
-    so VARCHAR(255) NOT NULL,
-    product VARCHAR(255) NOT NULL,
+    mo VARCHAR(255) UNIQUE PRIMARY KEY,
+    so VARCHAR(255) NOT NULL UNIQUE,
     canvas VARCHAR(255) NOT NULL,
     frame VARCHAR(255) NOT NULL,
     worker VARCHAR(255) NOT NULL,
@@ -108,22 +106,21 @@ async function seedOrders(client) {
 
     console.log(`Created "Orders" table`);
 
-    // Insert data into the "Orders" table
-   // const insertedOrders = await Promise.all(
-     // orders.map(
-       // (orders) => client.sql`
-        //INSERT INTO orders (id, mo, so, product, canvas, frame, worker, doc, comment)
-        //VALUES (${orders.id}, ${orders.mo}, ${orders.so}, ${orders.product}, ${orders.canvas}, ${orders.frame}, ${orders.worker}, ${orders.doc},${orders.comment})
-        //ON CONFLICT (id) DO NOTHING;
-      //`,
-      //),
-    //);
+    //Insert data into the "Orders" table
+      const insertedOrders = await Promise.all(
+      orders.map(
+       (orders) => client.sql`
+        INSERT INTO orders (mo, so, canvas, frame, worker, doc, comment)
+        VALUES (${orders.mo}, ${orders.so}, ${orders.canvas}, ${orders.frame}, ${orders.worker}, ${orders.doc},${orders.comment})
+      `,
+      ),
+    );
 
-    //console.log(`Seeded ${insertedOrders.length} Orders`);
+    console.log(`Seeded ${insertedOrders.length} Orders`);
 
     return {
       createTable,
-      //orders: insertedOrders,
+      orders: insertedOrders,
     };
   } catch (error) {
     console.error('Error seeding orders:', error);

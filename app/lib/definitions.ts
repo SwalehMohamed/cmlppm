@@ -57,10 +57,8 @@ export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
 };
 
 export type LatestOrders = {
-  id: string;
   mo: string;
   so: string;
-  product: string;
   canvas: 'N/A' | 'Store' | 'Approval' | 'Cutting' | 'PVC Welding' | 'Stiching' | 'Branding' | 'Half Copmlete' | 'Complete';
   frame: 'N/A' | 'Cutting' | 'Setting and Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
   worker: string;

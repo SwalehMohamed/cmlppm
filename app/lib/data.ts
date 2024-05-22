@@ -7,10 +7,10 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
-  Orders,
   LatestOrders,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { orders } from './placeholder-data';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -58,7 +58,7 @@ export async function fetchLatestOrders() {
   try {
     const data = await sql<LatestOrders>`
       FROM orders
-      SELECT orders.id, orders.mo, orders.so, orders.product, orders.canvas, orders.frame, orders.worker, orders.doc, orders.comment
+      SELECT orders.mo, orders.so, orders.canvas, orders.frame, orders.worker, orders.doc, orders.comment
       FROM orders
       ORDER BY invoices.doc DESC
       LIMIT 5`;
@@ -144,6 +144,38 @@ export async function fetchFilteredInvoices(
   }
 }
 
+export async function fetchFilteredOrders(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const invoices = await sql<LatestOrders>`
+      SELECT
+        orders.mo,
+        orders.so,
+        orders.canvas,
+        orders.frame,
+        orders.worker,
+        orders.doc,
+        orders.comment
+      FROM orders
+      WHERE
+        orders.mo ILIKE ${`%${query}%`} OR
+        orders.so ILIKE ${`%${query}%`} OR
+        orders.product ILIKE ${`%${query}%`} 
+      ORDER BY orders.mo DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return orders;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch orders.');
+  }
+}
+
 export async function fetchInvoicesPages(query: string) {
   try {
     const count = await sql`SELECT COUNT(*)
@@ -162,6 +194,24 @@ export async function fetchInvoicesPages(query: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchOrderPages(query: string) {
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM orders
+    WHERE
+    orders.mo ILIKE ${`%${query}%`} OR
+    orders.so ILIKE ${`%${query}%`} OR
+    orders.product ILIKE ${`%${query}%`} 
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of orders.');
   }
 }
 
@@ -187,6 +237,32 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchOrdersByMO(mo: string) {
+  try {
+    const data = await sql<LatestOrders>`
+      SELECT
+      orders.mo,
+      orders.so,
+      orders.canvas,
+      orders.frame,
+      orders.worker,
+      orders.doc,
+      orders.comment
+    FROM orders
+      WHERE orders.mo = ${mo};
+    `;
+
+    const orders = data.rows.map((orders) => ({
+      ...orders,
+    }));
+
+    return orders[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch orders.');
   }
 }
 

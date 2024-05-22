@@ -188,14 +188,12 @@ const revenue = [
 
 const orders =[
 {
-  id:'13F07535-D59E-4157-B011-K8D2EF4E0CBB',
   mo:'001',
   so:'001',
-  product:'Tarp',
   canvas:'Cutting',
   frame:'N/A',
   worker:'John',
-  doc:'26/05/2024',
+  doc:'2024-05-26',
   comment:'Processing',
 },
 ];

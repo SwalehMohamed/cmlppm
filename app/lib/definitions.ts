@@ -101,8 +101,14 @@ export type CustomerField = {
 };
 
 export type OrdersField = {
+  map(arg0: (order: any) => import("react").JSX.Element): import("react").ReactNode;
+  mo: string;
+  so: string;
   canvas: 'N/A' | 'Store' | 'Approval' | 'Cutting' | 'PVC Welding' | 'Stiching' | 'Branding' | 'Half Copmlete' | 'Complete';
-  frame: 'N/A' | 'Cutting' | 'Setting' | 'Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
+  frame: 'N/A' | 'Cutting' | 'Setting'|'Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
+  worker: string;
+  doc: string;
+  comment: 'On Hold' | 'Processing';
 };
 
 export type InvoiceForm = {

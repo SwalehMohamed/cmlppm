@@ -9,9 +9,9 @@ import {
   Revenue,
   LatestOrders,
   Orders,
+  OrdersField
 } from './definitions';
 import { formatCurrency } from './utils';
-import { orders } from './placeholder-data';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -241,7 +241,7 @@ export async function fetchInvoiceById(id: string) {
 
 export async function fetchOrdersByMO(mo: string) {
   try {
-    const data = await sql<LatestOrders>`
+    const data = await sql<OrdersField>`
       SELECT
       orders.mo,
       orders.so,

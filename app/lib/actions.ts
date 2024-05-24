@@ -127,8 +127,8 @@ export async function updateOrder(
     return { message: 'Database Error: Failed to Update Order.' };
   }
  
-  revalidatePath('/dashboard/Orders');
-  redirect('/dashboard/Orders');
+  revalidatePath('/dashboard/orders');
+  redirect('/dashboard/orders');
 }
 
 export async function deleteOrders(mo: string) {

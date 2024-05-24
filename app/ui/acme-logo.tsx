@@ -7,7 +7,6 @@ export default function AcmeLogo() {
     <div className={`${lusitana.className} block flex-row items-center leading-none text-white`}>
       <Image src={profilePic} alt="MCL PM" placeholder="blur" />
       <p className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        M.P.M.
       </p>
     </div>
   );

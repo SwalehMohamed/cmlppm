@@ -5,9 +5,9 @@ import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { useFormState } from 'react-dom'
 import { createOrder } from '@/app/lib/actions';
-import { OrdersField } from '@/app/lib/definitions';
+import { Orders } from '@/app/lib/definitions';
 
-export default function Form({ orders }: { orders: OrdersField[] }) {
+export default function Form({ orders }: { orders: Orders[] }) {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createOrder, initialState);
  

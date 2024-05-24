@@ -1,8 +1,8 @@
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { LatestInvoicesSkeleton } from '@/app/ui/skeletons';
 import { Metadata } from 'next';
+import LatestOrders from '@/app/ui/dashboard/latest-invoices';
  
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -15,7 +15,7 @@ export default async function Page() {
         Dashboard
       </h1>
         { <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <LatestInvoices /> </Suspense> }
+          <LatestOrders /> </Suspense> }
       
     </main>
   );

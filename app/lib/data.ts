@@ -8,6 +8,7 @@ import {
   User,
   Revenue,
   LatestOrders,
+  Orders,
 } from './definitions';
 import { formatCurrency } from './utils';
 import { orders } from './placeholder-data';
@@ -151,7 +152,7 @@ export async function fetchFilteredOrders(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const invoices = await sql<LatestOrders>`
+    const orders = await sql<LatestOrders>`
       SELECT
         orders.mo,
         orders.so,
@@ -163,8 +164,7 @@ export async function fetchFilteredOrders(
       FROM orders
       WHERE
         orders.mo ILIKE ${`%${query}%`} OR
-        orders.so ILIKE ${`%${query}%`} OR
-        orders.product ILIKE ${`%${query}%`} 
+        orders.so ILIKE ${`%${query}%`} 
       ORDER BY orders.mo DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
@@ -203,8 +203,7 @@ export async function fetchOrderPages(query: string) {
     FROM orders
     WHERE
     orders.mo ILIKE ${`%${query}%`} OR
-    orders.so ILIKE ${`%${query}%`} OR
-    orders.product ILIKE ${`%${query}%`} 
+    orders.so ILIKE ${`%${query}%`} 
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
@@ -281,6 +280,24 @@ export async function fetchCustomers() {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
+  }
+}
+
+export async function fetchOrders() {
+  try {
+    const data = await sql<Orders>`
+      SELECT
+        mo,
+        so
+      FROM orders
+      ORDER BY mo ASC
+    `;
+
+    const orders = data.rows;
+    return orders;
+  } catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch all Orders.');
   }
 }
 

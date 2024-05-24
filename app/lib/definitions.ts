@@ -10,12 +10,10 @@ export type User = {
   password: string;
 };
 export type Orders = {
-  id: string;
   mo: string;
   so: string;
-  product: string;
   canvas: 'N/A' | 'Store' | 'Approval' | 'Cutting' | 'PVC Welding' | 'Stiching' | 'Branding' | 'Half Copmlete' | 'Complete';
-  frame: 'N/A' | 'Cutting' | 'Setting and Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
+  frame: 'N/A' | 'Cutting' | 'Setting'|'Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
   worker: string;
   doc: string;
   comment: 'On Hold' | 'Processing';
@@ -60,7 +58,7 @@ export type LatestOrders = {
   mo: string;
   so: string;
   canvas: 'N/A' | 'Store' | 'Approval' | 'Cutting' | 'PVC Welding' | 'Stiching' | 'Branding' | 'Half Copmlete' | 'Complete';
-  frame: 'N/A' | 'Cutting' | 'Setting and Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
+  frame: 'N/A' | 'Cutting' | 'Setting' | 'Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
   worker: string;
   doc: string;
   comment: 'On Hold' | 'Processing';
@@ -100,6 +98,11 @@ export type FormattedCustomersTable = {
 export type CustomerField = {
   id: string;
   name: string;
+};
+
+export type OrdersField = {
+  canvas: 'N/A' | 'Store' | 'Approval' | 'Cutting' | 'PVC Welding' | 'Stiching' | 'Branding' | 'Half Copmlete' | 'Complete';
+  frame: 'N/A' | 'Cutting' | 'Setting' | 'Welding' | 'Grinding' | 'Filler' | 'Sanding' | 'Painting';
 };
 
 export type InvoiceForm = {

@@ -196,6 +196,42 @@ const orders =[
   doc:'2024-05-26',
   comment:'Processing',
 },
+{
+  mo:'002',
+  so:'002',
+  canvas:'PVC Welding',
+  frame:'Welding',
+  worker:'Mark',
+  doc:'2024-05-26',
+  comment:'On Hold',
+},
+{
+  mo:'003',
+  so:'003',
+  canvas:'Stitching',
+  frame:'N/A',
+  worker:'Ali',
+  doc:'2024-05-26',
+  comment:'Processing',
+},
+{
+  mo:'004',
+  so:'004',
+  canvas:'Approval',
+  frame:'N/A',
+  worker:'Mary',
+  doc:'2024-05-30',
+  comment:'Processing',
+},
+{
+  mo:'005',
+  so:'005',
+  canvas:'Store',
+  frame:'Cutting',
+  worker:'Mary',
+  doc:'2024-05-30',
+  comment:'Processing',
+},
 ];
 
 module.exports = {

@@ -106,20 +106,20 @@ async function seedOrders(client) {
     console.log(`Created "Orders" table`);
 
     //Insert data into the "Orders" table
-     // const insertedOrders = await Promise.all(
-     // orders.map(
-      // (orders) => client.sql`
-      //  INSERT INTO orders (mo, so, canvas, frame, worker, doc, comment)
-      //  VALUES (${orders.mo}, ${orders.so}, ${orders.canvas}, ${orders.frame}, ${orders.worker}, ${orders.doc},${orders.comment})
-     // `,
-     // ),
-   // );
+     const insertedOrders = await Promise.all(
+     orders.map(
+      (orders) => client.sql`
+        INSERT INTO orders (mo, so, canvas, frame, worker, doc, comment)
+        VALUES (${orders.mo}, ${orders.so}, ${orders.canvas}, ${orders.frame}, ${orders.worker}, ${orders.doc},${orders.comment})
+      `,
+      ),
+    );
 
-    //console.log(`Seeded ${insertedOrders.length} Orders`);
+    console.log(`Seeded ${insertedOrders.length} Orders`);
 
     return {
       createTable,
-      //orders: insertedOrders,
+      orders: insertedOrders,
     };
   } catch (error) {
     console.error('Error seeding orders:', error);

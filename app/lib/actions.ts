@@ -1,6 +1,6 @@
 'use server';
 
-import { z } from 'zod';
+import { EnumValues, z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -14,7 +14,7 @@ const FormSchema = z.object({
   so: z.string({
     invalid_type_error: 'Please enter SO Number.',
   }),
-  canvas: z.enum(['N/A', 'Store', 'Approval', 'Cutting', 'PVC Welding', 'Stiching', 'Branding', 'Half Copmlete', 'Complete'], {
+  canvas: z.enum(["N/A", "Store", "Approval", "Cutting", "PVC Welding", "Stiching", "Branding", "Half Copmlete", "Complete"], {
     invalid_type_error: 'Please select an status of the canvas.',
   }),
   frame: z.enum(['N/A', 'Cutting', 'Setting', 'Welding', 'Grinding', 'Filler', 'Sanding', 'Painting'], {

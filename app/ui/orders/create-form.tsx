@@ -7,7 +7,7 @@ import { useFormState } from 'react-dom'
 import { createOrder } from '@/app/lib/actions';
 import { Orders } from '@/app/lib/definitions';
 
-export default function Form({ orders }: { orders: Orders[] }) {
+export default function Form() {
   const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createOrder, initialState);
  
@@ -76,14 +76,16 @@ export default function Form({ orders }: { orders: Orders[] }) {
               defaultValue=""
               aria-describedby="canvas-error"
             >
-              <option value="" disabled>
-                Select a Status
-              </option>
-              {orders.map((orders) => (
-                <option key={orders.canvas} value={orders.canvas}>
-                  {orders.canvas}
-                </option>
-              ))}
+              <option value="" disabled> Select a Status </option>
+              <option value="N/A" > Not Applicable </option>
+              <option value="Store" > Store </option>
+              <option value="Approval" > Approval </option>
+              <option value="Cutting" > Cutting </option>
+              <option value="PVC Welding">PVC Welding </option>
+              <option value="Stiching" > Stiching </option>
+              <option value="Branding" > Branding </option>
+              <option value="Half Copmlete" > Half Copmlete </option>
+              <option value= "Complete" >  Complete </option>
             </select>
           </div>
           <div id="canvas-error" aria-live="polite" aria-atomic="true">
@@ -108,14 +110,15 @@ export default function Form({ orders }: { orders: Orders[] }) {
               defaultValue=""
               aria-describedby="frame-error"
             >
-              <option value="" disabled>
-                Select a Status
-              </option>
-              {orders.map((orders) => (
-                <option key={orders.frame} value={orders.frame}>
-                  {orders.frame}
-                </option>
-              ))}
+              <option value="" disabled> Select a Status </option>
+              <option value='N/A' > Not Applicable </option>
+              <option value='Cutting' > Cutting </option>
+              <option value='Setting' > Setting </option>
+              <option value='Welding' > Welding </option>
+              <option value='Grinding' > Grinding </option>
+              <option value='Filler' > Filler </option>
+              <option value='Sanding' > Sanding </option>
+              <option value='Painting' > Painting </option>
             </select>
           </div>
           <div id="frame-error" aria-live="polite" aria-atomic="true">

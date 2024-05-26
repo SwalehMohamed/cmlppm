@@ -3,6 +3,7 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchOrderPages } from '@/app/lib/data';
+import Pagination from '../orders/pagination';
 
 export default async function LatestOrders({
   searchParams,
@@ -23,6 +24,9 @@ export default async function LatestOrders({
     { <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
       <Table query={query} currentPage={currentPage} />
     </Suspense> }
+    <div className="mt-5 flex w-full justify-center">
+        { <Pagination totalPages={totalPages} /> }
+      </div>
   </div>
   );
 }

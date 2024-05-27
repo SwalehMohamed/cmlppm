@@ -203,7 +203,8 @@ export async function fetchOrderPages(query: string) {
     FROM orders
     WHERE
     orders.mo ILIKE ${`%${query}%`} OR
-    orders.so ILIKE ${`%${query}%`} 
+    orders.so ILIKE ${`%${query}%`} OR
+    orders.worker ILIKE ${`%${query}%`}
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);

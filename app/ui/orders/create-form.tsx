@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import clsx from 'clsx';
 import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
-import { useFormState } from 'react-dom'
+import { useFormState, useFormStatus } from 'react-dom'
 import { createOrder } from '@/app/lib/actions';
-import { Orders } from '@/app/lib/definitions';
 
 export default function Form() {
   const initialState = { message: null, errors: {} };
@@ -227,9 +227,22 @@ export default function Form() {
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200">
           Cancel
         </Link>
-        <Button type="submit" >Create MO</Button>
+        <Create/>
       </div>
       </div>
     </form>
   ;
+}
+
+export function Create({ }) {
+  const { pending } = useFormStatus();
+
+  return (
+      <Button className={clsx(
+          'flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50'
+        )} aria-disabled={pending}>
+      Add MO 
+    </Button>
+      
+  );
 }
